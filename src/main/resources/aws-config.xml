@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aws-context="http://www.springframework.org/schema/cloud/aws/context"
+	xmlns:aws-messaging="http://www.springframework.org/schema/cloud/aws/messaging"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd 
+        http://www.springframework.org/schema/cloud/aws/context
+        http://www.springframework.org/schema/cloud/spring-cloud-aws-context.xsd
+        http://www.springframework.org/schema/cloud/aws/messaging
+        http://www.springframework.org/schema/cloud/spring-cloud-aws-messaging.xsd">
+
+
+	<bean id="yamlProperties"
+		class="org.springframework.beans.factory.config.YamlPropertiesFactoryBean">
+		<property name="resources" value="classpath:aws-credentials.yml" />
+	</bean>
+
+	<context:property-placeholder
+		properties-ref="yamlProperties" />
+
+	<aws-context:context-resource-loader />
+	<aws-context:context-region region="ap-south-1" />
+	<aws-context:context-credentials>
+		<aws-context:simple-credentials
+			access-key="${aws.accessKey}" secret-key="${aws.secretKey}" />
+	</aws-context:context-credentials>
+
+	<aws-messaging:queue-messaging-template
+		id="queueMessagingTemplate" />
+	<aws-messaging:annotation-driven-queue-listener />
+
+	<aws-messaging:notification-messaging-template
+		id="notificationMessagingTemplate" />
+
+</beans>

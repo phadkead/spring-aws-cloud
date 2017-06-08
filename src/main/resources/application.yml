@@ -1,0 +1,14 @@
+sqs:
+  queue: ###  
+  queueUrl: ###
+s3:
+  source:
+    bucket: ###
+  destination:
+    bucket: ###
+sns:
+  topic: ###
+  topicArn: ###
+server:
+  port: 8081
+  contextPath: /spring-aws
