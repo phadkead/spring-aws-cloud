@@ -1,6 +1,6 @@
 
 # AWS with Spring-cloud 
-REST API that copies S3 object from source bucket to target bucket and inserts status of this activity to DynamoDB.
+REST API that copies S3 object from source bucket to target bucket and inserts success/failure of this activity to DynamoDB.
 
 ## Prerequisites:
 1. AWS account
